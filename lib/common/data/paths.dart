@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 
 const _appDataDirectory = "Clock";
-const _ringtonesDirectory = "ringtones";
+// const _ringtonesDirectory = "ringtones";
 String _appDataDirectoryPath = "";
 
 Future<void> initializeAppDataDirectory() async {
@@ -31,11 +31,11 @@ Future<String> getAppDataDirectoryPath() async {
 }
 
 Future<String> getRingtonesDirectoryPath() async {
-  return path.join(await getAppDataDirectoryPath(), _ringtonesDirectory);
+  return await getAppDataDirectoryPath();
 }
 
 String getRingtonesDirectoryPathSync() {
-  return path.join(getAppDataDirectoryPathSync(), _ringtonesDirectory);
+  return getAppDataDirectoryPathSync();
 }
 
 Future<String> getTimezonesDatabasePath() async {

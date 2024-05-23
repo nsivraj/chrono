@@ -8,6 +8,15 @@ import 'package:clock_app/common/data/paths.dart';
 Future<void> initializeDatabases() async {
   String timezonesDatabasePath = await getTimezonesDatabasePath();
 
+  File tzDBPath = File(timezonesDatabasePath);
+  while (!tzDBPath.parent.existsSync()) {
+    print("Waiting for path $timezonesDatabasePath to exist!!");
+    // sleep(Duration(seconds: 3));
+    await Future.delayed(const Duration(milliseconds: 3000), () {
+      return true;
+    });
+  }
+
   // Only copy if the database doesn't exist
   if (FileSystemEntity.typeSync(timezonesDatabasePath) ==
       FileSystemEntityType.notFound) {

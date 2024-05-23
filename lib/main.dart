@@ -2,7 +2,7 @@ import 'dart:core';
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:clock_app/alarm/alarm_manager.dart';
 import 'package:clock_app/alarm/logic/alarm_isolate.dart';
 import 'package:clock_app/alarm/logic/update_alarms.dart';
 import 'package:clock_app/app.dart';
@@ -18,10 +18,9 @@ import 'package:clock_app/settings/types/listener_manager.dart';
 import 'package:clock_app/system/data/app_info.dart';
 import 'package:clock_app/system/data/device_info.dart';
 import 'package:clock_app/system/logic/handle_boot.dart';
+import 'package:clock_app/system/logic/show_when_locked.dart';
 import 'package:clock_app/timer/logic/update_timers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boot_receiver/flutter_boot_receiver.dart';
-import 'package:flutter_show_when_locked/flutter_show_when_locked.dart';
 import 'package:timezone/data/latest_all.dart';
 
 void main() async {
@@ -30,14 +29,14 @@ void main() async {
   initializeTimeZones();
   final initializeData = [
     initializePackageInfo(),
-    initializeAndroidInfo(),
+    initializeDeviceInfo(),
     initializeAppDataDirectory(),
     initializeNotifications(),
-    AndroidAlarmManager.initialize(),
-    BootReceiver.initialize(handleBoot),
+    AlarmManager.initialize(),
+    BootHandler.initialize(handleBoot),
     RingtonePlayer.initialize(),
     initializeAudioSession(),
-    FlutterShowWhenLocked().hide(),
+    ShowWhenLocked.hide(),
     initializeDatabases(),
   ];
   await Future.wait(initializeData);

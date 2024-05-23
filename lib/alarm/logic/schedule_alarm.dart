@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:clock_app/alarm/alarm_manager.dart';
 import 'package:clock_app/alarm/logic/alarm_isolate.dart';
 import 'package:clock_app/alarm/logic/alarm_reminder_notifications.dart';
 import 'package:clock_app/alarm/types/alarm_event.dart';
@@ -41,7 +41,7 @@ Future<void> scheduleAlarm(
     //   await cancelAlarmReminderNotification(scheduleId);
     // }
 
-    AndroidAlarmManager.cancel(scheduleId);
+    AlarmManager.cancel(scheduleId.toString());
 
     // This is for logging purposes
     alarmEvents.insert(
@@ -68,12 +68,12 @@ Future<void> scheduleAlarm(
     scheduleIds.add(ScheduleId(id: scheduleId));
     await saveList<ScheduleId>(name, scheduleIds);
 
-    // 
+    //
     // if (type == ScheduledNotificationType.alarm && !snooze) {
     // }
     //
     // Scheduling the actual alarm
-    AndroidAlarmManager.oneShotAt(
+    AlarmManager.oneShotAt(
       startDate,
       scheduleId,
       triggerScheduledNotification,
@@ -89,7 +89,7 @@ Future<void> scheduleAlarm(
       },
     );
   }
-  }
+}
 
 Future<void> cancelAlarm(int scheduleId, ScheduledNotificationType type) async {
   if (!Platform.environment.containsKey('FLUTTER_TEST')) {
@@ -112,7 +112,7 @@ Future<void> cancelAlarm(int scheduleId, ScheduledNotificationType type) async {
       await cancelAlarmReminderNotification(scheduleId);
     }
 
-    AndroidAlarmManager.cancel(scheduleId);
+    AlarmManager.cancel(scheduleId.toString());
   }
 }
 

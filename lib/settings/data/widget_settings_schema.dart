@@ -37,8 +37,7 @@ SettingGroup widgetSettingSchema = SettingGroup(
                 //     7),
               ],
               enableConditions: [
-                GeneralCondition(
-                    () => (androidInfo?.version.sdkInt ?? 34) >= 31)
+                GeneralCondition(() => (deviceInfo?.version.sdkInt ?? 34) >= 31)
               ],
               defaultValue: 1,
               onChange: (context, value) async {
@@ -87,8 +86,7 @@ SettingGroup widgetSettingSchema = SettingGroup(
               150,
               70,
               enableConditions: [
-                GeneralCondition(
-                    () => (androidInfo?.version.sdkInt ?? 34) >= 26)
+                GeneralCondition(() => (deviceInfo?.version.sdkInt ?? 34) >= 26)
               ],
 
               onChange: (context, value) async {
@@ -161,8 +159,7 @@ SettingGroup widgetSettingSchema = SettingGroup(
               },
               enableConditions: [
                 ValueCondition(["Show Date"], (value) => value == true),
-                GeneralCondition(
-                    () => (androidInfo?.version.sdkInt ?? 34) >= 26)
+                GeneralCondition(() => (deviceInfo?.version.sdkInt ?? 34) >= 26)
               ],
               // snapLength: 1,
             ),
